@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Checkout Produk</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background: #f4f4f4;
+      font-family: Arial, sans-serif;
+    }
+
+    .checkout-box {
+      max-width: 500px;
+      margin: 40px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .checkout-box img {
+      width: 100%;
+      max-height: 300px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    select, input, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="checkout-box">
+    <h1>Checkout Produk</h1>
+
+    <!-- Gambar produk -->
+    <img src="img/logo.jpg" alt="Produk Pilihan">
+
+    <!-- Form Checkout -->
+    <label for="ukuran">Pilih Ukuran:</label>
+    <select id="ukuran" name="ukuran" required>
+      <option value="">-- Pilih Ukuran --</option>
+      <option value="S">S</option>
+      <option value="M">M</option>
+      <option value="L">L</option>
+      <option value="XL">XL</option>
+      <option value="XXL">XXL</option>
+    </select>
+
+    <label for="nama">Nama Lengkap:</label>
+    <input type="text" id="nama" name="nama" required>
+
+    <label for="alamat">Alamat Pengiriman:</label>
+    <textarea id="alamat" name="alamat" rows="3" required></textarea>
+
+    <label for="metode">Metode Pembayaran:</label>
+    <select id="metode" name="metode" required>
+      <option value="DANA">DANA</option>
+      <option value="QRIS">QRIS</option>
+      <option value="COD">COD (Bayar di Tempat)</option>
+    </select>
+
+    <!-- Tombol WA -->
+    <button type="button" onclick="kirimPesan()">Kirim Pesanan via WhatsApp</button>
+  </div>
+
+  <script>
+    function kirimPesan() {
+      const ukuran = document.getElementById("ukuran").value;
+      const nama = document.getElementById("nama").value;
+      const alamat = document.getElementById("alamat").value;
+      const metode = document.getElementById("metode").value;
+
+      const noWa = "62895378253092"; // GANTI DENGAN NOMOR WHATSAPP KAMU
+
+      if (!ukuran || !nama || !alamat || !metode) {
+        alert("Harap lengkapi semua data sebelum mengirim.");
+        return;
+      }
+
+      const pesan = `Halo, saya ingin memesan:\n\n` +
+                    `👕 Ukuran: ${ukuran}\n` +
+                    `📦 Nama: ${nama}\n` +
+                    `🏠 Alamat: ${alamat}\n` +
+                    `💳 Metode Pembayaran: ${metode}`;
+
+      const encodedPesan = encodeURIComponent(pesan);
+      window.open(`https://wa.me/${noWa}?text=${encodedPesan}`, "_blank");
+    }
+  </script>
+</body>
+</html>
